@@ -4,16 +4,11 @@ if(isset($_POST)){
 
 
 
-if(!isset($_SESSION)){
-   session_start();
-}
-
-
-    //Recoger los valores del formulario de registro
+    //Recoger los valores del formulario de actualizacion
     $nombre= isset($_POST['nombre'])? mysqli_real_escape_string($db,$_POST['nombre']): false;
     $apellido=isset($_POST['apellido'])? mysqli_real_escape_string($db,$_POST['apellido']): false;
     $email=isset($_POST['email'])? mysqli_real_escape_string($db,$_POST['email']): false;
-    $password=isset($_POST['pass'])? mysqli_real_escape_string($db,$_POST['pass']): false;
+
     //ARRAY DE ERRORES
     $errores = array();
     //Validar los datos antes de guardarlos en la base de datos 
@@ -22,10 +17,11 @@ if(!isset($_SESSION)){
     if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/", $nombre)){
        $nombre_validate = true;
 
+
     }else{
        $nombre_validate = false;
-
         $errores['nombre'] = "<h4 id='alerta'>El nombre no es valido</h4>";
+        
     }
 
     //VALIDAR CAMPO APELLIDO
@@ -36,6 +32,7 @@ if(!isset($_SESSION)){
         $apellido_validate = false;
  
          $errores['apellido'] = "<h4 id='alerta'>El apellido no es valido</h4>";
+        
      }
  
    
@@ -55,47 +52,45 @@ if(!isset($_SESSION)){
      }
 
 
-      //VALIDAR CAMPO PASSWORD
-      if(!empty($password)){
-        $pass_validate = true;
- 
-     }else{
-        $pass_validate = false;
- 
-         $errores['pass'] = "<h4 id='alerta'>La clave no es valida</h4>";
-     }
+   $guardar_usuario = false;
+   
+     if(count($errores)==0){     
+         $usuario = $_SESSION['usuario'];
+
+
+        //COMPROBAR  SI EL EMAIL YA EXISTE
+        $sql = "SELECT id, email FROM usuarios WHERE email = '$email'";
+        $isset_email = mysqli_query($db , $sql);
+        $isset_user = mysqli_fetch_assoc($isset_email);
 
 
 
 
-     $guardar_usuario = false;
-     if(count($errores)==0){
-      $guardar_usuario=true;
-
-         //CIFRAR LA CONTRA
-         $password_segura = password_hash($password, PASSWORD_BCRYPT, ['cost'=>4]);
+        if($isset_user['id']== $usuario['id'] || $isset_user == null){
+         //ACTUALIZAR  USUARIO EN LA BASE DE DATOS
+        $sql = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellido' , email = '$email' WHERE id = ".$usuario['id'];
+        $guardar_usuario = mysqli_query($db,$sql);
        
+        if($guardar_usuario == true){
 
-        //INSERTAR  USUARIO EN LA BASE DE DATOS
-        $sql = "INSERT INTO usuarios VALUES(null, '$nombre', '$apellido', '$email', '$password_segura', CURDATE());";
-        $guardar = mysqli_query($db,$sql);
-
-
-        
-       
-        if($guardar == true){
-         $_SESSION['completado']= "<h5 id='alerta2'>El registro se ha completado con exito!</h5>";
+        $_SESSION['usuario']['nombre'] = $nombre;
+        $_SESSION['usuario']['apellidos']= $apellido;
+        $_SESSION['usuario']['email']=$email;
+        $_SESSION['completado']= "<h5 id='alerta2'>Tus datos se han actualizado con exito!</h5>";
+         
         }else{
-         $_SESSION['errores']['general']="<h5 id='alerta'>El registro no se ha completado</h5>";
+         $_SESSION['errores']['general']="<h5 id='alerta'>Ups....algo ha salido mal</h5>";
         }
-      
+        }else{
+         $_SESSION['errores']['general']="<h5 id='alerta'>El email ya existe</h5>";
+        }
      }else{
         $_SESSION['errores'] = $errores;
    
      }
 
 }
-header('Location:index.php');
+header('Location:perfil.php');
 
 
 

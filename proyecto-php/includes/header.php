@@ -1,4 +1,6 @@
-<?php require_once('conexion.php');?>
+<?php require_once('includes/conexion.php');?>
+<?php require_once('includes/helpers.php');?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +10,31 @@
     <link rel="stylesheet" href="../proyecto-php/css/style.css">
     <title>Bienvenidos al BLOG</title>
 </head>
-<body>
+
     <!--CABECERA-->
 <header id="header">
     <!--LOGO-->
     <div id="LOGO">
         <a href="index.php">Blog de videojuegos</a>
     </div>
-
+    <!--MENU-->
+   
     <nav id="menu">
         <ul>
             <li><a href="index.php">Inicio</a></li>
-            <li><a href="index.php">Categoria 1</a></li>
-            <li><a href="index.php">Categoria 2</a></li>
-            <li><a href="index.php">Categoria 3</a></li>
-            <li><a href="index.php">Categoria 4</a></li>
+            <?php 
+            $categorias = conseguirCategorias($db);
+            if(!empty($categorias)):
+            ?>
+            <?php 
+                while($categoria =mysqli_fetch_assoc($categorias)):?>
+                        <li>
+                            <a href="categoria.php?id=<?=$categoria['id']?>"><?=$categoria['nombre']?></a>
+                        </li>
+                <?php 
+                endwhile;
+                endif;
+                ;?>
             <li><a href="index.php">Sobre mi</a></li>
             <li><a href="index.php">Contacto</a></li>
 
@@ -30,3 +42,4 @@
     </nav>
     <div class="clearfix"></div>
 </header>
+

@@ -1,49 +1,36 @@
    <!--CAJA PRINCIPAL-->
 
-   <div class="principal">
+<div class="principal">
 
-<h1>Ultimas entradas</h1>
+<h1 style="color:#007ee5">Ultimas entradas</h1>
+<hr>
 
-<article class="entrada">
-<a class="hover_a" href="">
-<h2>Titulo de mi entrada: </h2>
-<p>
-   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, possimus ex non, doloribus sunt rerum sequi magnam, accusantium ut a commodi illum repudiandae earum sit velit saepe assumenda minus nisi.
-</p>
-</a>
+
+<?php
+ $entradas = conseguirTodasLasEntradas($db, TRUE, );
+
+ if(!empty($entradas)):
+ 
+   while($entrada =mysqli_fetch_assoc($entradas)):
+   ?> 
+   <article class="entrada">
+   <a class="hover_a" href="entrada.php?id=<?=$entrada['id']?>">
+   <h2> <?=$entrada['titulo']?></h2>
+   <span><?=$entrada['categoria']." | ".$entrada['fecha']?></span>
+   <p><?= substr($entrada['descripcion'],0, 190)." ...."?></p>
+   </a>
+   
 </article>
 
+<?php 
 
-<article class="entrada">
-<a class="hover_a"  href="">
-<h2>Titulo de mi entrada: </h2>
-<p>
-   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, possimus ex non, doloribus sunt rerum sequi magnam, accusantium ut a commodi illum repudiandae earum sit velit saepe assumenda minus nisi.
-</p>
-</a>
-</article>
+endwhile;
+endif;
+
+?>
 
 
 
-<article class="entrada">
-<a class="hover_a"  href="">
-<h2>Titulo de mi entrada: </h2>
-<p>
-   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, possimus ex non, doloribus sunt rerum sequi magnam, accusantium ut a commodi illum repudiandae earum sit velit saepe assumenda minus nisi.
-</p>
-</a>
-</article>
+<a class="ver_todas" href="entradas.php">Ver todas las entradas</a>
 
-
-
-<article class="entrada">
-<a class="hover_a"  href="">
-<h2>Titulo de mi entrada:</h2>
-<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, possimus ex non, doloribus sunt rerum sequi magnam, accusantium ut a commodi illum repudiandae earum sit velit saepe assumenda minus nisi.
-</p>
-</a>
-</article>
-
-    <a class="ver_todas" href="">Ver todas las entradas</a>
-
-</div><!--Fin principal-->
+</div>
