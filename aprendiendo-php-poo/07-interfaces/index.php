@@ -15,7 +15,7 @@ interface Ordenador {
 
 
 
-class iMAC {
+class iMAC implements Ordenador{
     public $modelo;
 
 
@@ -26,12 +26,23 @@ class iMAC {
     public function getModelo(){
         return $this->modelo ;
     }
+
+    public function encender(){
+
+    }
+    public function apagar(){
+  
+    }
+    public function reiniciar(){}
+
+    public function desfragmentar(){}
+    public function detectarUsb(){}
 }
 
 
 
 $maquintosh = new iMAC();
-
+$maquintosh->setModelo("MACBOCK");
 var_dump($maquintosh);
 
 

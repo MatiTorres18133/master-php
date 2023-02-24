@@ -23,6 +23,10 @@ class Coche{
         $this->caballosF=$caballaje;
         $this->plazas=$plazas;
     }
+
+
+
+    
     //Metodos , son acciones que hace el objetos (antes, funciones)
     public function getColor(){
         //Busca en eesta clase la propiedad X
