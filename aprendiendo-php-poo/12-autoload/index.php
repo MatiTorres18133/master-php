@@ -25,10 +25,14 @@ class Principal{
         $this->entrada=new Entrada;
 
     }
+
+
+  
 }
 
 $principal = new Principal();
 var_dump(get_class_methods($principal));
+$principal->informacion();
 // var_dump($principal->usuario);
 
 //Comprobar si existe una clase 

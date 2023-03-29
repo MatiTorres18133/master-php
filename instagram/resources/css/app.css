@@ -1,0 +1,18 @@
+
+.image_path{
+    width: 200px;
+    height: 200px;
+    border-radius: 900px;
+}
+
+.navbar .image_path_user{
+  border-radius: 900px;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+.navbar .image_path_user img{
+ height: 100%;
+}
