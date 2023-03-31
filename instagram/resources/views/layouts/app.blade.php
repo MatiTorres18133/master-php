@@ -71,10 +71,10 @@
                             <li class="nav-item">
                             @if(Auth::user()->image)
                           
-                            <div class="image_path_user">
-                            <img class="m-auto" src="{{ url('/user/avatar/'.Auth::user()->image)}}">
+                                <div class="image_path_user_avatar">
+                                    <img class="m-auto" src="{{ url('/user/avatar/'.Auth::user()->image)}}">
                                     
-                        </div>                 
+                                    </div>                 
                              @endif
                                 
 

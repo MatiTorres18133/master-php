@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
 
 use App\Models\Image;
 
@@ -29,15 +30,16 @@ class ImageController extends Controller
       
 
 
-        $image_path = $request->input('image_path');
+        $image_path = $request->file('image_path');
         $description = $request->input('description');
-
+      
         //Asignar vaores al objeto
         $user = \Auth::user();
         $image = new Image();
         $image->user_id = $user->id;
        
         $image->description = $description;
+
 
         
         //Subir fichero
@@ -56,5 +58,10 @@ class ImageController extends Controller
        
     
 
+    }
+
+    public function getImage($filename){
+        $file = Storage::disk('images')->get($filename);
+        return new Response($file, 200);
     }
 }

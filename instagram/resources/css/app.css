@@ -5,7 +5,7 @@
     border-radius: 900px;
 }
 
-.navbar .image_path_user{
+.navbar .image_path_user {
   border-radius: 900px;
   width: 35px;
   height: 35px;
@@ -13,6 +13,72 @@
   margin-left: 20px;
 }
 
+.image_path_user_avatar{
+  border-radius: 900px;
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  margin-left: 20px;
+  float: left;
+  margin-right: 10px;
+}
+.image_path_user_avatar img{
+  height: 100%;
+}
 .navbar .image_path_user img{
  height: 100%;
+}
+.img_user_confs{
+  width: 150px;
+  border-radius: 90px;
+  height: 150px;
+  background-color: red;
+  padding: 0;
+}
+
+.img_user_confs img{
+
+  border-radius: 90px;
+  height: 100%;
+
+
+ 
+}
+
+
+
+.username{
+ line-height: 35px;
+ font-weight: bold;
+}
+.pub_image{
+  margin-bottom: 40px;
+}
+.card-body{
+  padding:0;
+  margin-bottom: 20px;
+
+  overflow: hidden;
+}
+
+
+.card-body img{
+  width: 100%;
+}
+
+
+.card-body .description{
+  padding: 15px;
+}
+
+.card-body .description span a{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 200ms;
+
+}
+
+.card-body .description span a:hover{
+  color: rgb(32, 32, 32);
 }

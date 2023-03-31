@@ -11,19 +11,45 @@
                 </div>
 
             @endif
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+            @foreach($images as $image)
+            <div class="card pub_image">
+                <div class="card-header">
+                    @if($image->user->image)
+                    <div class="image_path_user_avatar">
+                        <img class="m-auto" src="{{ url('/user/avatar/'.$image->user->image)}}">            
+                        </div>  
+                        @endif 
+                    <div class="username">  
+                        {{ucfirst($image->user->nick)}}
+                    </div>
+                </div>
+             
+
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <div class="card-body_image">
+                    <img class="m-auto" src="{{route('imagefile', ['filename'=>$image->image_path]) }}"/>
+                    </div>
 
-                    {{ __('You are logged in!') }}
+                  <div class="likes">
+
+                  </div >
+
+
+                  <div class="container description">
+                
+                    <span class="nickname"><a href="#">{{'@'.$image->user->nick}}</a> </span>
+                  <p>{{$image->description}}</p>
+                  </div >
+
+                    
                 </div>
+               
             </div>
+            @endforeach
+
+
+
         </div>
     </div>
 </div>

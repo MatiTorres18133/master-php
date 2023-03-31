@@ -23,9 +23,9 @@
                         <div class="row mb-3">
                         @if(Auth::user()->image)
                           
-
-                          <img class="m-auto image_path" src="{{ url('/user/avatar/'.Auth::user()->image)}}">
-                                    
+                            <div class="container img_user_confs">
+                          <img class="m-auto image_path_user_conf" src="{{ url('/user/avatar/'.Auth::user()->image)}}">
+                    </div>     
                                                   
                           @endif
                         </div>

@@ -25,6 +25,8 @@ Route::post('/user/edit', [App\Http\Controllers\UserController::class, 'udpate']
 Route::get('/user/avatar/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('avatar');
 Route::get('/subir-imagen', [App\Http\Controllers\ImageController::class, 'create'])->name('create');
 Route::post('/image/save', [App\Http\Controllers\ImageController::class, 'save'])->name('saveImage');
+Route::get('/image/file/{filename}', [App\Http\Controllers\ImageController::class, 'getImage'])->name('imagefile');
+
 
 
 
